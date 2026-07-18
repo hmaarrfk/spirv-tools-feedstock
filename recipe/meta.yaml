@@ -1,6 +1,8 @@
 {% set version = "2026.2" %}
 # Keep this in synch with https://github.com/KhronosGroup/SPIRV-Tools/blob/v2026.2/DEPS#L14
-{% set headers_version = "1.4.350.0" %}
+# spirv_headers_revision there is tagged both vulkan-sdk-1.4.350.0 and vulkan-sdk-1.4.350.1
+# (identical commit) - using .1 since only that version has a win-arm64 build.
+{% set headers_version = "1.4.350.1" %}
 
 package:
   name: spirv-tools
@@ -18,7 +20,7 @@ build:
     # But we expect these to be rather stable
     # so lets try 'x' https://github.com/conda-forge/spirv-tools-feedstock/issues/3
     - {{ pin_subpackage('spirv-tools', 'x') }}
-  number: 0
+  number: 1
 
 requirements:
   build:
