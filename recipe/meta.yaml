@@ -1,8 +1,10 @@
 {% set version = "2026.2" %}
-# Keep this in synch with https://github.com/KhronosGroup/SPIRV-Tools/blob/v2026.2/DEPS#L14
-# spirv_headers_revision there is tagged both vulkan-sdk-1.4.350.0 and vulkan-sdk-1.4.350.1
-# (identical commit) - using .1 since only that version has a win-arm64 build.
-{% set headers_version = "1.4.350.1" %}
+# v2026.2's DEPS pins headers at vulkan-sdk-1.4.350.1, but we intentionally build
+# against the newer vulkan-sdk-1.4.357.0 headers (the DEPS pin of the SPIRV-Tools
+# vulkan-sdk-1.4.357.0 tag, which contains v2026.2): the run_constrained below pins
+# downstream consumers to the headers we build with, and intel-graphics-compiler
+# >=2.40 needs SPV_INTEL_predicated_io from headers 1.4.357.0.
+{% set headers_version = "1.4.357.0" %}
 
 package:
   name: spirv-tools
@@ -20,7 +22,7 @@ build:
     # But we expect these to be rather stable
     # so lets try 'x' https://github.com/conda-forge/spirv-tools-feedstock/issues/3
     - {{ pin_subpackage('spirv-tools', 'x') }}
-  number: 1
+  number: 2
 
 requirements:
   build:
