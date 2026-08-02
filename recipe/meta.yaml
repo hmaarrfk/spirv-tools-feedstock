@@ -20,6 +20,10 @@ source:
     # generated tables compile:
     # https://github.com/KhronosGroup/SPIRV-Tools/commit/7fa1f024cf86890b2f9ac2aab19d0583cea59277
     - 0002-backport-SPV_QCOM_image_processing3-operand-support.patch
+    # 1.4.357.0 also adds five FPEncoding enumerants (SPV_EXT_ocp_microscaling_types)
+    # not covered by an exhaustive switch, tripping -Werror=switch; map them to
+    # SPV_FP_ENCODING_UNKNOWN.  Superseded by upstream f80351511e in v2026.3.
+    - 0003-handle-ocp-microscaling-fp-encodings.patch
 
 build:
   run_exports:
